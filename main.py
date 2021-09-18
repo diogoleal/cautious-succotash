@@ -7,12 +7,12 @@ load_dotenv()
 
 token = os.getenv('TOKEN')
 site = os.getenv('SITE')
-url_t1api = "https://the-one-api.dev/v2/movie"
+URL1API = "https://the-one-api.dev/v2/movie"
 
 
 def test_get_status_code():
     headers = {"Authorization": 'Bearer {}'.format(token)}
-    response = requests.request("GET", url_t1api, headers=headers)
+    response = requests.request("GET", URL1API, headers=headers)
 
     return_value = response.status_code
     if return_value == requests.codes.ok:
@@ -22,26 +22,26 @@ def test_get_status_code():
 
 
 def test_user(host):
-    d = host.user("diogo")
-    assert d.exists
-    assert d.name == "diogo"
-    assert d.uid == 105
-    assert d.gid == 65534
-    assert d.group == "nogroup"
-    assert d.gids == [65534]
-    assert d.groups == ["nogroup"]
-    assert d.shell == "/bin/bash"
-    assert d.home == "/home/diogo"
-    assert d.password == "*"
+    usuarioname = host.user("diogo")
+    assert usuarioname.exists
+    assert usuarioname.name == "diogo"
+    assert usuarioname.uid == 105
+    assert usuarioname.gid == 65534
+    assert usuarioname.group == "nogroup"
+    assert usuarioname.gids == [65534]
+    assert usuarioname.groups == ["nogroup"]
+    assert usuarioname.shell == "/bin/bash"
+    assert usuarioname.home == "/home/diogo"
+    assert usuarioname.password == "*"
 
 
 def test_file(host):
-    d = host.file("/var/www/tools/")
-    assert d.is_directory
-    assert not d.is_file
-    f = host.file("/var/www/tools/tools.log")
-    assert f.exists
-    assert f.is_file
+    dirname = host.file("/var/www/tools/")
+    assert dirname.is_directory
+    assert not dirname.is_file
+    filename = host.file("/var/www/tools/tools.log")
+    assert filename.exists
+    assert filename.is_file
 
 
 def test_git_is_installed(host):

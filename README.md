@@ -1,7 +1,7 @@
 # cautious-succotash
 
 
-[image](succotash.jpg "Succotash")
+![image](succotash.jpg "Succotash")
 
 
 ```bash

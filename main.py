@@ -21,18 +21,18 @@ def test_get_status_code():
         assert False
 
 
+def test_redis_service(host):
+    redisserver = host.process.get(user="redis", comm="redis-server")
+    assert redisserver.args
+
+
 def test_user(host):
     usuarioname = host.user("diogo")
     assert usuarioname.exists
     assert usuarioname.name == "diogo"
-    assert usuarioname.uid == 105
-    assert usuarioname.gid == 65534
-    assert usuarioname.group == "nogroup"
-    assert usuarioname.gids == [65534]
-    assert usuarioname.groups == ["nogroup"]
+    assert usuarioname.uid == 1001
     assert usuarioname.shell == "/bin/bash"
     assert usuarioname.home == "/home/diogo"
-    assert usuarioname.password == "*"
 
 
 def test_file(host):
